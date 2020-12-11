@@ -6,7 +6,7 @@ import edu.epam.shape.exception.ServiceException;
 import edu.epam.shape.service.CubeService;
 
 public class CubeServiceImpl implements CubeService {
-    public static final int SIDE_SUM = 6;
+    private static final int SIDE_SUM = 6;
 
     @Override
     public double squareCalculator(Cube cube) {

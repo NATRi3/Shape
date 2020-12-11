@@ -2,12 +2,18 @@ package edu.epam.shape.entity.impl;
 
 import edu.epam.shape.entity.Point;
 import edu.epam.shape.entity.Shape;
+import edu.epam.shape.observer.Observable;
+import edu.epam.shape.observer.impl.CubeObserver;
 import edu.epam.shape.util.StringNameCreator;
 
-public class Cube implements Shape {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cube implements Shape, Observable<CubeObserver> {
     private String name;
     private Point point;
     private double side;
+    private static final List<CubeObserver> OBSERVER_LIST = new ArrayList<>();
 
     public Cube(double side, Point point) {
         name = StringNameCreator.createName();
@@ -53,4 +59,23 @@ public class Cube implements Shape {
         return (int) (point.hashCode()*(side)/hash)*name.hashCode();
     }
 
+    @Override
+    public void attach(CubeObserver observer) {
+        OBSERVER_LIST.add(observer);
+    }
+
+    @Override
+    public void detach(CubeObserver observer) {
+        OBSERVER_LIST.remove(observer);
+    }
+
+    @Override
+    public void notifyObserver() {
+        if(!OBSERVER_LIST.isEmpty()){
+            for(CubeObserver observer: OBSERVER_LIST){
+                observer.performedSurfaceSquare(this);
+                observer.performedSquare(this);
+            }
+        }
+    }
 }
