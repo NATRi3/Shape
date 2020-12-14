@@ -4,6 +4,7 @@ import edu.epam.shape.entity.Shape;
 import edu.epam.shape.entity.impl.Cube;
 import edu.epam.shape.exception.ServiceException;
 import edu.epam.shape.service.CubeService;
+import edu.epam.shape.validation.CubeValidator;
 
 public class CubeServiceImpl implements CubeService {
     private static final int SIDE_SUM = 6;
@@ -20,7 +21,16 @@ public class CubeServiceImpl implements CubeService {
 
     @Override
     public boolean isCube(Shape shape) {
-        return shape.getClass().equals(Cube.class);
+        boolean result = true;
+        if(!shape.getClass().equals(Cube.class)){
+            result = false;
+        }else{
+            Cube cube = (Cube) shape;
+            if (!CubeValidator.isCubeValid(cube.getSide(),cube.getPoint())){
+                result = false;
+            }
+        }
+        return result;
     }
 
     @Override

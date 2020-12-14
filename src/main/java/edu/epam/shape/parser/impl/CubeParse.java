@@ -19,16 +19,16 @@ public class CubeParse implements ParseShape<Cube> {
     private static final CubeFactory CUBE_FACTORY = new CubeFactory();
 
     @Override
-    public List<Cube> parse(List<String> list) throws CubeFactoryException {
+    public List<Cube> parse(List<String> list) {
         List<Cube> result = new ArrayList<>();
-        for(String str: list){
+        for(String str: list) {
             String[] arguments = str.split(REGEX);
-            if(CubeValidator.isCubeValid(arguments)) {
+            try {
                 result.add(CUBE_FACTORY.createShape(Double.parseDouble(arguments[0]),
-                        new Point(Double.parseDouble(arguments[1]),Double.parseDouble(arguments[2]),Double.parseDouble(arguments[3]))));
-            }else {
-                StringBuilder msg = new StringBuilder().append(Arrays.toString(arguments)).append("Wrong argument");
-                LOGGER.info(msg);
+                        new Point(Double.parseDouble(arguments[1]), Double.parseDouble(arguments[2]), Double.parseDouble(arguments[3]))));
+            } catch (NumberFormatException | CubeFactoryException fe) {
+                String msg = String.valueOf(new StringBuilder((Arrays.toString(arguments))).append("Wrong argument").append(fe.getMessage()));
+                LOGGER.info(msg, fe);
             }
         }
         return result;

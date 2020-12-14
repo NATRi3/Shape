@@ -33,11 +33,7 @@ public class DataReader {
         } catch (IOException e) {
             throw new DataReaderException(e);
         }
-        try {
-            return new CubeParse().parse(file);
-        } catch (CubeFactoryException e) {
-            throw new DataReaderException(e);
-        }
+        return new CubeParse().parse(file);
     }
 }
 
