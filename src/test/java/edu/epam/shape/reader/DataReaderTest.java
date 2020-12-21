@@ -1,7 +1,7 @@
 package edu.epam.shape.reader;
 
 import edu.epam.shape.entity.Point;
-import edu.epam.shape.entity.impl.Cube;
+import edu.epam.shape.entity.Cube;
 import edu.epam.shape.exception.DataReaderException;
 import org.testng.Assert;
 import org.testng.annotations.Test;

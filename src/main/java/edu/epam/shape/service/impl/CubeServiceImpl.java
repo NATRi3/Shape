@@ -1,13 +1,13 @@
 package edu.epam.shape.service.impl;
 
 import edu.epam.shape.entity.Shape;
-import edu.epam.shape.entity.impl.Cube;
+import edu.epam.shape.entity.Cube;
 import edu.epam.shape.exception.ServiceException;
 import edu.epam.shape.service.CubeService;
 import edu.epam.shape.validation.CubeValidator;
 
 public class CubeServiceImpl implements CubeService {
-    private static final int SIDE_SUM = 6;
+    private static final int NUMBER_SIDE = 6;
 
     @Override
     public double squareCalculator(Cube cube) {
@@ -16,7 +16,7 @@ public class CubeServiceImpl implements CubeService {
 
     @Override
     public double surfaceCalculator(Cube cube) {
-        return (cube.getSide()*cube.getSide())*SIDE_SUM;
+        return (cube.getSide()*cube.getSide())* NUMBER_SIDE;
     }
 
     @Override

@@ -1,14 +1,12 @@
 package edu.epam.shape.service.impl;
 
 import edu.epam.shape.entity.Point;
-import edu.epam.shape.entity.impl.Cube;
+import edu.epam.shape.entity.Cube;
 import edu.epam.shape.exception.ServiceException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 public class CubeServiceImplTest {
 

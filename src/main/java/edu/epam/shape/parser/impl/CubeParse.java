@@ -1,34 +1,29 @@
 package edu.epam.shape.parser.impl;
 
 import edu.epam.shape.entity.Point;
-import edu.epam.shape.entity.impl.Cube;
-import edu.epam.shape.exception.CubeFactoryException;
-import edu.epam.shape.factory.impl.CubeFactory;
 import edu.epam.shape.parser.ParseShape;
-import edu.epam.shape.validation.CubeValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class CubeParse implements ParseShape<Cube> {
+public class CubeParse implements ParseShape<Point,Double> {
     private static final Logger LOGGER = LogManager.getLogger(CubeParse.class);
     private static final String REGEX = ", ";
-    private static final CubeFactory CUBE_FACTORY = new CubeFactory();
 
     @Override
-    public List<Cube> parse(List<String> list) {
-        List<Cube> result = new ArrayList<>();
-        for(String str: list) {
-            String[] arguments = str.split(REGEX);
+    public Map<Point,Double> parse(List<String> data) {
+        Map<Point,Double> result = new HashMap<>();
+        for(String argumentString: data) {
+            String[] arguments = argumentString.split(REGEX);
             try {
-                result.add(CUBE_FACTORY.createShape(Double.parseDouble(arguments[0]),
-                        new Point(Double.parseDouble(arguments[1]), Double.parseDouble(arguments[2]), Double.parseDouble(arguments[3]))));
-            } catch (NumberFormatException | CubeFactoryException fe) {
-                String msg = String.valueOf(new StringBuilder((Arrays.toString(arguments))).append("Wrong argument").append(fe.getMessage()));
-                LOGGER.info(msg, fe);
+                result.put(new Point(Double.parseDouble(arguments[0]),Double.parseDouble(arguments[1]),
+                        Double.parseDouble(arguments[2])),Double.parseDouble(arguments[4]));
+            } catch (NumberFormatException fe) {
+                LOGGER.info(Arrays.toString(arguments) + "Wrong argument" + fe.getMessage(), fe);
             }
         }
         return result;

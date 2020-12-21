@@ -11,6 +11,5 @@ public interface Repository<T extends Shape, I> {
     void remove(T t);
     T get(I i);
     List<T> sort (Comparator<? super T> comparator);
-
     List<T> query (Specification specification);
 }

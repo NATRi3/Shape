@@ -1,7 +1,7 @@
 package edu.epam.shape.service;
 
 import edu.epam.shape.entity.Shape;
-import edu.epam.shape.entity.impl.Cube;
+import edu.epam.shape.entity.Cube;
 import edu.epam.shape.exception.ServiceException;
 
 public interface CubeService {

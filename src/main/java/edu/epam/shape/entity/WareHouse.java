@@ -1,7 +1,5 @@
 package edu.epam.shape.entity;
 
-import edu.epam.shape.entity.impl.ShapeParameter;
-
 import java.util.HashMap;
 import java.util.Map;
 

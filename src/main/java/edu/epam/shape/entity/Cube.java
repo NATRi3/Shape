@@ -1,19 +1,23 @@
-package edu.epam.shape.entity.impl;
+package edu.epam.shape.entity;
 
-import edu.epam.shape.entity.Point;
-import edu.epam.shape.entity.Shape;
-import edu.epam.shape.observer.Observable;
 import edu.epam.shape.observer.impl.CubeObserver;
 import edu.epam.shape.util.StringNameCreator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
-public class Cube implements Shape, Observable<CubeObserver> {
+public class Cube implements Shape<CubeObserver> {
     private String name;
     private Point point;
     private double side;
     private static final List<CubeObserver> OBSERVER_LIST = new ArrayList<>();
+
+    public Cube(String name,double side, Point point) {
+        this.name = name;
+        this.point = point;
+        this.side = side;
+    }
 
     public Cube(double side, Point point) {
         name = StringNameCreator.createName();
@@ -42,21 +46,8 @@ public class Cube implements Shape, Observable<CubeObserver> {
     }
 
     public void setSide(double side) {
+        this.notifyObserver();
         this.side = side;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cube cube = (Cube) o;
-        return Double.compare(cube.side, side) == 0 && point.equals(cube.point);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 89;
-        return (int) (point.hashCode()*(side)/hash)*name.hashCode();
     }
 
     @Override
@@ -77,5 +68,29 @@ public class Cube implements Shape, Observable<CubeObserver> {
                 observer.performedSquare(this);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cube cube = (Cube) o;
+        return Double.compare(cube.side, side) == 0 && point.equals(cube.point);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 31;
+        return (int) (point.hashCode()*(side)/hash)*name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Cube{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", point=").append(point);
+        sb.append(", side=").append(side);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -1,8 +1,8 @@
 package edu.epam.shape.observer.impl;
 
 import edu.epam.shape.entity.WareHouse;
-import edu.epam.shape.entity.impl.Cube;
-import edu.epam.shape.entity.impl.ShapeParameter;
+import edu.epam.shape.entity.Cube;
+import edu.epam.shape.entity.ShapeParameter;
 import edu.epam.shape.observer.Observer;
 import edu.epam.shape.service.impl.CubeServiceImpl;
 
@@ -14,7 +14,7 @@ public class CubeObserver implements Observer<Cube> {
         ShapeParameter wareHouseShapeParameter = WareHouse.INSTANCE.getByName(cube.getName());
         double surfSqr = cubeService.surfaceCalculator(cube);
         if (wareHouseShapeParameter != null) {
-            wareHouseShapeParameter.setSurfaceSqr(surfSqr);
+            wareHouseShapeParameter.setSurfaceSquare(surfSqr);
         } else {
             WareHouse.INSTANCE.put(cube.getName(), new ShapeParameter(surfSqr, -1));
         }
@@ -26,7 +26,7 @@ public class CubeObserver implements Observer<Cube> {
         ShapeParameter wareHouseShapeParameter = WareHouse.INSTANCE.getByName(cube.getName());
         double sqr = cubeService.squareCalculator(cube);
         if (wareHouseShapeParameter != null) {
-            wareHouseShapeParameter.setSurfaceSqr(sqr);
+            wareHouseShapeParameter.setSurfaceSquare(sqr);
         } else {
             WareHouse.INSTANCE.put(cube.getName(), new ShapeParameter(-1, sqr));
         }

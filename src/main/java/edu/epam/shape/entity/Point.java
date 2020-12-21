@@ -47,13 +47,17 @@ public class Point {
 
     @Override
     public int hashCode() {
-        int hash = 394;
+        int hash = 31;
         return (int) ((hash*x+hash/y)*(z*hash));
     }
 
     @Override
     public String toString() {
-        return String.valueOf(new StringBuilder().append("Point{ x=").append(x)
-                .append(", y=").append(y).append(", z=").append(z).append('}'));
+        final StringBuilder sb = new StringBuilder("Point{");
+        sb.append("x=").append(x);
+        sb.append(", y=").append(y);
+        sb.append(", z=").append(z);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -1,6 +1,6 @@
 package edu.epam.shape.util;
 
-import edu.epam.shape.entity.impl.Cube;
+import edu.epam.shape.entity.Cube;
 
 import java.util.Comparator;
 
@@ -27,6 +27,12 @@ public enum CubeComparator implements Comparator<Cube> {
         @Override
         public int compare(Cube o1, Cube o2) {
             return Double.compare(o1.getSide(),o2.getSide());
+        }
+    },
+    NAME{
+        @Override
+        public int compare(Cube o1, Cube o2){
+            return o1.getName().compareTo(o2.getName());
         }
     }
 }

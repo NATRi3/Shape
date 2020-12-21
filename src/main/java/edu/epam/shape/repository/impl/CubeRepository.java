@@ -1,7 +1,6 @@
 package edu.epam.shape.repository.impl;
 
-import edu.epam.shape.entity.impl.Cube;
-import edu.epam.shape.observer.Observer;
+import edu.epam.shape.entity.Cube;
 import edu.epam.shape.repository.Repository;
 import edu.epam.shape.specificarion.Specification;
 
@@ -11,9 +10,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CubeRepository implements Repository<Cube, Integer> {
-    private static final List<Cube> cubeList = new ArrayList<>();
-    private static final List<Observer> observList = new ArrayList<>();
+    public static final CubeRepository INSTANCE = new CubeRepository();
+    private final List<Cube> cubeList;
 
+    private CubeRepository(){
+        cubeList = new ArrayList<>();
+    }
     @Override
     public void add(Cube cube) {
         cubeList.add(cube);

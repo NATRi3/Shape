@@ -10,30 +10,30 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DataReader {
     private static final Logger logger = LogManager.getLogger(DataReader.class);
-    private static final String PATH = "src//main//resources//data.txt";
+    private static final String PATH = "data//data.txt";
 
-    public List readShopFromFile(String url) throws DataReaderException {
-        List file = new ArrayList<String>();
+    public List<String> readShopFromFile(String path) throws DataReaderException {
+        List<String> fileData;
         try {
-            BufferedReader reader;
             try {
-                reader = new BufferedReader(new FileReader(url));
+                fileData = Files.readAllLines(Path.of(path), StandardCharsets.UTF_8);
             } catch (FileNotFoundException e){
-                reader = new BufferedReader(new FileReader(PATH));
-            }
-            String read;
-            while ((read = reader.readLine()) != null) {
-                file.add(read);
+                fileData = Files.readAllLines(Path.of(PATH), StandardCharsets.UTF_8);
             }
         } catch (IOException e) {
+            logger.error(e.getMessage());
             throw new DataReaderException(e);
         }
-        return new CubeParse().parse(file);
+        return fileData;
     }
 }
 
